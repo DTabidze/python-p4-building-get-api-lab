@@ -53,7 +53,9 @@ def baked_goods_by_price():
 def most_expensive_baked_good():
     baked_goods = BakedGood.query.order_by(BakedGood.price.desc()).first()
     # goods_serialized = [goods.to_dict(rules=("-bakery",)) for goods in baked_goods]
-    response = make_response(jsonify(baked_goods.to_dict(rules=("-bakery",))), 200)
+    response = make_response(
+        jsonify(baked_goods.to_dict(rules=("-bakery.baked_goods",))), 200
+    )
     response.headers["Content-Type"] = "application/json"
     return response
 
